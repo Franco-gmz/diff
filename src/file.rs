@@ -38,4 +38,3 @@ mod test{
         assert_eq!(expected_length, lines.len());
     }
 }
-

@@ -3,7 +3,6 @@
 pub fn lcs(a: &[String], b: &[String]) -> Vec<Vec<i32>> {
     let mut grid = vec![vec![0; a.len() + 1]; b.len() + 1];
     for i in 0..a.len() {
-        //for j in 0..b.len() {
         for (j, _item) in b.iter().enumerate() {
             if a[i] == b[j] {
                 grid[i + 1][j + 1] = grid[i][j] + 1;
@@ -30,5 +29,30 @@ pub fn print_diff(grid: &[Vec<i32>], a: &[String], b: &[String], i: usize, j: us
         println!("< { }", a[i - 1]);
     } else {
         println!();
+    }
+}
+
+#[cfg(test)]
+mod test{
+    use crate::diff::lcs;
+
+    #[test]
+    fn lcs_test(){
+        //lines1
+        let mut lines1: Vec<String> = Vec::new();
+        lines1.push("abcd".to_string());
+        lines1.push("aaa".to_string());
+        lines1.push("fff".to_string());
+        //lines2
+        let mut lines2: Vec<String> = Vec::new();
+        lines2.push("acde".to_string());
+        lines2.push("bbb".to_string());
+        lines2.push("fff".to_string());
+        //expected grid
+        let mut expected_grid = vec![vec![0; 4]; 4];
+        expected_grid[3][3] = 1;
+        //lcs
+        let grid = lcs(&lines1, &lines2);
+        assert_eq!(grid, expected_grid);
     }
 }
