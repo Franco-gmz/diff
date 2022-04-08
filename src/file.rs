@@ -2,7 +2,7 @@ use std::fs;
 use crate::errors::*;
 
 /// It receives a path to a file, opens it and returns the content in a vector by lines.
-/// If the opening fails, it returns a message as String.
+/// If the opening fails, it returns a FileError.
 pub fn read_file_lines(filename: &str) -> Result<Vec<String>, Errors> {
     let mut content = Vec::new();
     let lines: String = match fs::read_to_string(filename) {
