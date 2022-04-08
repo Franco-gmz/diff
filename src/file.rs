@@ -1,12 +1,13 @@
 use std::fs;
+use crate::errors::*;
 
 /// It receives a path to a file, opens it and returns the content in a vector by lines.
 /// If the opening fails, it returns a message as String.
-pub fn read_file_lines(filename: &str) -> Result<Vec<String>, String> {
+pub fn read_file_lines(filename: &str) -> Result<Vec<String>, Errors> {
     let mut content = Vec::new();
     let lines: String = match fs::read_to_string(filename) {
         Ok(readlines) => readlines,
-        Err(_) => return Err("No se pudo abrir el archivo".to_string()),
+        Err(_) => return Err(Errors::FileError("No se pudo abrir el archivo".to_string())),
     };
     if lines != ""{
         let mut lines: Vec<&str> = lines.split('\n').collect();
@@ -17,7 +18,7 @@ pub fn read_file_lines(filename: &str) -> Result<Vec<String>, String> {
     Ok(content)
 }
 
-#[cfg(test)]
+/*#[cfg(test)]
 mod test{
     use crate::file::read_file_lines;
 
@@ -38,3 +39,4 @@ mod test{
         assert_eq!(expected_length, lines.len());
     }
 }
+*/

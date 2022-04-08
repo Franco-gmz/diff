@@ -1,3 +1,7 @@
+use crate::args::*;
+use crate::file::*;
+use crate::errors::*;
+
 ///Longest common subsequence. It receives two references to Vec<String>
 /// and returns a grid with the results of the algorithm.
 pub fn lcs(a: &[String], b: &[String]) -> Vec<Vec<i32>> {
@@ -32,9 +36,26 @@ pub fn print_diff(grid: &[Vec<i32>], a: &[String], b: &[String], i: usize, j: us
     }
 }
 
+///Execute diff. Extract the logic from main
+pub fn run()-> std::result::Result<(), Errors> {
+    /* arguments */
+    let args: Arguments = Arguments::new()?;
+    let filename1: &String = &args.arg1;
+    let filename2: &String = &args.arg2;
+    /* read files */
+    let content1: Vec<String> = read_file_lines(filename1)?;
+    let content2: Vec<String> = read_file_lines(filename2)?;
+    /* diff */
+    let grid: Vec<Vec<i32>> = lcs(&content1, &content2);
+    let length1 = content1.len();
+    let length2 = content2.len();
+    print_diff(&grid, &content1, &content2, length1, length2);
+    Ok(())
+}
+
 #[cfg(test)]
 mod test{
-    use crate::diff::lcs;
+    use crate::fdiff::lcs;
 
     #[test]
     fn lcs_test(){
