@@ -18,16 +18,16 @@ pub fn read_file_lines(filename: &str) -> Result<Vec<String>, Errors> {
     Ok(content)
 }
 
-/*#[cfg(test)]
+#[cfg(test)]
 mod test{
     use crate::file::read_file_lines;
-
+    use crate::errors::*;
 
     #[test]
     fn couldnt_open(){
         let non_existent_file = "name";
-        let expected_message = "No se pudo abrir el archivo".to_string();
-        assert_eq!(Err(expected_message), read_file_lines(&non_existent_file));
+        let expected = Errors::FileError("No se pudo abrir el archivo".to_string());
+        assert_eq!(Err(expected), read_file_lines(&non_existent_file));
     }
 
     #[test]
@@ -39,4 +39,3 @@ mod test{
         assert_eq!(expected_length, lines.len());
     }
 }
-*/
