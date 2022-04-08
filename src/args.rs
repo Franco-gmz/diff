@@ -2,6 +2,7 @@ use std::env;
 use crate::errors::*;
 
 ///Structure that contains the console parameters.
+#[derive(Debug, PartialEq)]
 pub struct Arguments {
     pub arg1: String,
     pub arg2: String,
@@ -21,5 +22,17 @@ impl Arguments {
         } else {
             Err(Errors::ArgError("Insuficiente cantidad de parametros".to_string()))
         }
+    }
+}
+
+#[cfg(test)]
+mod test{
+    use crate::args::Arguments;
+    use crate::errors::*;
+
+    #[test]
+    fn no_args_test(){
+        let expected = Errors::ArgError("Insuficiente cantidad de parametros".to_string());
+        assert_eq!(Err(expected), Arguments::new());
     }
 }
