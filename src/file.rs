@@ -1,3 +1,4 @@
+//! This module contains a public function to read a file by lines.
 use crate::errors::*;
 use std::fs;
 

@@ -1,10 +1,11 @@
+//! This module contains some public functions to calculate and print diff, taking string vectors.
 use crate::args::*;
 use crate::errors::*;
 use crate::file::*;
 
 ///Longest common subsequence. It receives two references to Vec<String>
 /// and returns a grid with the results of the algorithm.
-pub fn lcs(a: &[String], b: &[String]) -> Vec<Vec<i32>> {
+fn lcs(a: &[String], b: &[String]) -> Vec<Vec<i32>> {
     let mut grid = vec![vec![0; a.len() + 1]; b.len() + 1];
     for i in 0..a.len() {
         for (j, _item) in b.iter().enumerate() {
@@ -20,8 +21,8 @@ pub fn lcs(a: &[String], b: &[String]) -> Vec<Vec<i32>> {
     grid
 }
 
-///It prints the diff results on stdout.
-pub fn print_diff(grid: &[Vec<i32>], a: &[String], b: &[String], i: usize, j: usize) {
+///It prints the diff results on stdout taking the result of lcs like input.
+fn print_diff(grid: &[Vec<i32>], a: &[String], b: &[String], i: usize, j: usize) {
     if i > 0 && j > 0 && a[i - 1] == b[j - 1] {
         print_diff(grid, a, b, i - 1, j - 1);
         println!("  { }", a[i - 1]);
@@ -36,7 +37,7 @@ pub fn print_diff(grid: &[Vec<i32>], a: &[String], b: &[String], i: usize, j: us
     }
 }
 
-///Execute diff. Extract the logic from main
+///Execute file diff by lines, taking the file paths from console. Then it prints the results on stdout.
 pub fn run() -> std::result::Result<(), Errors> {
     /* arguments */
     let args: Arguments = Arguments::new()?;

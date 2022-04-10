@@ -1,3 +1,4 @@
+//! This module allows get the console parameters.
 use crate::errors::*;
 use std::env;
 
