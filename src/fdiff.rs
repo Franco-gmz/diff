@@ -6,7 +6,7 @@ use crate::file::*;
 ///Longest common subsequence. It receives two references to Vec<String>
 /// and returns a grid with the results of the algorithm.
 fn lcs(a: &[String], b: &[String]) -> Vec<Vec<i32>> {
-    let mut grid = vec![vec![0; a.len() + 1]; b.len() + 1];
+    let mut grid = vec![vec![0; b.len() + 1]; a.len() + 1];
     for i in 0..a.len() {
         for (j, _item) in b.iter().enumerate() {
             if a[i] == b[j] {
