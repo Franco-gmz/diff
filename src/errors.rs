@@ -1,5 +1,5 @@
 #[derive(Debug, PartialEq)]
-pub enum Errors{
+pub enum Errors {
     ArgError(String),
     FileError(String),
 }

@@ -1,5 +1,5 @@
-use std::env;
 use crate::errors::*;
+use std::env;
 
 ///Structure that contains the console parameters.
 #[derive(Debug, PartialEq)]
@@ -20,18 +20,20 @@ impl Arguments {
                 arg2: args[2].clone(),
             })
         } else {
-            Err(Errors::ArgError("Insuficiente cantidad de parametros".to_string()))
+            Err(Errors::ArgError(
+                "Insuficiente cantidad de parametros".to_string(),
+            ))
         }
     }
 }
 
 #[cfg(test)]
-mod test{
+mod test {
     use crate::args::Arguments;
     use crate::errors::*;
 
     #[test]
-    fn no_args_test(){
+    fn no_args_test() {
         let expected = Errors::ArgError("Insuficiente cantidad de parametros".to_string());
         assert_eq!(Err(expected), Arguments::new());
     }
